@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS reviews (
   money_value INT,
   build_hrs INT,
   build_mins INT,
-  building_experience VARCHAR(50)
+  building_experience VARCHAR(50),
+  pid INT
 );
 
 INSERT INTO reviews VALUES (1, '2020-09-01', "Best Toy", "xLegoMaster827x", "20-25", 1, "myself", "I got this for my own birthday and now it has become my best friend XOXO", 0, 0, 5, 3, 2, 3, 21, "Expert");
