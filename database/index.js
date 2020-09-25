@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const Bluebird = require("bluebird");
+const Bluebird = require('bluebird');
 const mysqlConfig = require('./config.js');
 
 const connection = mysql.createConnection(mysqlConfig);

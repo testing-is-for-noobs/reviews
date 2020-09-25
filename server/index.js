@@ -12,7 +12,7 @@ app.get('/reviews', (req, res) => {
   });
 });
 
-app.put('/reviews/upvote/:voteType/:id', (req, res) => {
+app.put('/reviews/vote/:voteType/:id', (req, res) => {
   db.vote(req.params.voteType, req.params.id).then((data) => {
     res.status(202).send(data);
   }).catch((err) => {
