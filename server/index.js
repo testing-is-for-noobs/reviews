@@ -12,8 +12,8 @@ app.get('/reviews', (req, res) => {
   });
 });
 
-app.put('/reviews/vote/:voteType/:id', (req, res) => {
-  db.vote(req.params.voteType, req.params.id).then((data) => {
+app.put('/reviews/vote/:voteType/:id/:toggle', (req, res) => {
+  db.vote(req.params.voteType, req.params.id, req.params.toggle).then((data) => {
     res.status(202).send(data);
   }).catch((err) => {
     res.status(404).send(err);
