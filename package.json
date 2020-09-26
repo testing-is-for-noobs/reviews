@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "mysql -u kenny < schema.sql && node ./database/seed/seed.js",
+    "seed": "mysql -u kenny < reviewSchema.sql && node ./database/seed/seed.js && mysql -u kenny < productSchema.sql",
     "start:dev": "nodemon server/index.js",
     "react-dev": "webpack -d --watch"
   },
