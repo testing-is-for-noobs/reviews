@@ -4,8 +4,11 @@ const db = require('../database');
 const app = express();
 const port = 3000;
 
-app.get('/reviews', (req, res) => {
-  db.getReviews().then((data) => {
+app.use(express.static(`${__dirname}/../client/dist`));
+
+app.get('/:pid/reviews', (req, res) => {
+  db.getReviews(req.params.pid).then(([reviews, products]) => {
+    const data = { reviews, products };
     res.status(202).send(data);
   }).catch((err) => {
     res.status(404).send(err);
