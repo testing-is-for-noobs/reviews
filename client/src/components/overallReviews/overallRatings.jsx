@@ -4,8 +4,12 @@ function OverallRatings({ currentProduct }) {
   return (
     <div>
       <div>Overall Rating</div>
-      <div>{`${currentProduct.total_reviews} ===INSERT STAR BAR HERE=== ${currentProduct.total_reviews} Reviews `}</div>
-      <button> Write a Review </button>
+      <div>
+        ===INSERT STAR BAR HERE===
+        <span id="avgScore">{currentProduct.avg_score}</span>
+        {` ${currentProduct.total_reviews} Reviews `}
+      </div>
+      <button type="button"> Write a Review </button>
     </div>
   );
 }
