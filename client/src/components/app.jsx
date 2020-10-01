@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
 import OverallReviews from './overallReviews.jsx';
 import Filter from './filter.jsx'
 import FilteredOptions from './filteredOptions.jsx'
 import IndividualReview from './individualReview.jsx'
 import dummyData from './dummyData.js';
+
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(dummyData.products[0]);
@@ -25,7 +27,7 @@ function App() {
   ];
 
   useEffect(() => {
-    axios.get('12/reviews')
+    axios.get('15/reviews')
       .then((initialState) => {
         setCurrentProduct(initialState.data.products[0]);
         setCurrentReviews(initialState.data.reviews);
@@ -35,8 +37,13 @@ function App() {
       });
   }, []);
 
+  const Style = styled.div`
+  font-size: 16px;
+  font-family: Cera Pro,sans-serif;
+`;
+
   return (
-    <div>
+    <Style>
       <OverallReviews currentProduct={currentProduct} allStarStates={allStarStates} />
       <br />
       <Filter />
@@ -44,7 +51,7 @@ function App() {
       <FilteredOptions allStarStates={allStarStates} />
       <br />
       <IndividualReview currentReviews={currentReviews} />
-    </div>
+    </Style>
   );
 }
 

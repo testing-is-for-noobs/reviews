@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
+import starbar from './ratingBars/starbar.jsx';
+
 function IndividualReview({ currentReviews }) {
   const experienceTypes = ['Play Experience', 'Level of Difficulty', 'Value for Money', 'Building Experience'];
 
@@ -16,7 +18,10 @@ function IndividualReview({ currentReviews }) {
         return (
           <div key={i}>
             <div>{date}</div>
-            <div>{`===INSERT RATING BAR HERE=== ${review.rating}`}</div>
+            <div>
+              {starbar(review.rating)}
+              {` ${review.rating}`}
+            </div>
             <div>{review.review_header}</div>
             <div>
               {`${review.username} | `}
@@ -47,7 +52,10 @@ function IndividualReview({ currentReviews }) {
                 return (
                   <div key={experienceTypes[i]}>
                     <div>{experienceTypes[i]}</div>
-                    <div>{`===INSERT STATUS BAR HERE=== ${experienceRating}`}</div>
+                    <div>
+                      {starbar(experienceRating)}
+                      {` ${experienceRating}`}
+                    </div>
                   </div>
                 );
               }
