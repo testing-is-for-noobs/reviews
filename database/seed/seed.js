@@ -5,14 +5,14 @@ const mysqlConfig = require('../config.js');
 
 const connection = mysql.createConnection(mysqlConfig);
 
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 10000; i++) {
   let reviewData = {};
   // Generate random data
   reviewData.date = faker.date.recent(60);
   reviewData.rating = faker.random.number({ min: 1, max: 5 });
   reviewData.review_header = faker.company.catchPhrase();
   reviewData.username = faker.internet.userName();
-  reviewData.age_range = faker.random.arrayElement(['14-18', '19-24', '25-34', '35-44', '45-54', '55-64', '65 Or Older', null]);
+  reviewData.age_range = faker.random.arrayElement(['14-18', '19-24', '25-34', '35-44', '45-54', '55-64', '65 Or Older']);
   reviewData.recommendationYN = faker.random.arrayElement(['Y', 'N']);
   reviewData.purchased_for = faker.random.arrayElement(['Son', 'Daughter', 'Grandson', 'Granddaughter', "Friend or Family Member's Child", 'Friend', 'Self']);
   reviewData.review = faker.lorem.paragraph();

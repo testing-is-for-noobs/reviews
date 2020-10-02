@@ -15,16 +15,7 @@ function Ratings({ currentProduct, allStarStates}) {
   const RatingsStyle = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 3px;
-  `;
-
-  const StarButton = styled.button`
-    box-shadow: none;
-    cursor: pointer;
-    color: inherit;
-    font: inherit;
-    background-color: transparent;
-    border: 0;
+    gap: 5px;
   `;
 
   const XComponent = styled.span`
@@ -33,21 +24,72 @@ function Ratings({ currentProduct, allStarStates}) {
     font-family: inherit;
   `;
 
+  const Progress = styled.progress`
+
+    -webkit-appearance: none;
+    appearance: none;
+
+    ::-webkit-progress-value {
+      background-color: gold;
+      border-radius: 20px;
+    }
+
+    ::-webkit-progress-bar {
+      background-color: rgb(224, 224, 224);
+      border-radius: 20px;
+    }
+  `;
+
   return (
     <RatingsStyle>
       <div>Rating</div>
       {ratings.map((starRating, i) => {
         const [currentStar, setCurrentStar] = allStarStates[allStarStates.length - 1 - i];
 
+        const disabled = starRating.total === 0;
+
+        let backgroundColor;
+        let color;
+        let pointer;
+        let fontStyle;
+        if (disabled) {
+          color = 'rgb(224, 224, 224)';
+          backgroundColor = 'transparent';
+          pointer = 'no-drop';
+          fontStyle = 'italic';
+        } else if (currentStar) {
+          color = 'inherit';
+          backgroundColor = 'rgb(230, 243, 255)';
+          pointer = 'pointer';
+          fontStyle = 'inherit';
+        } else {
+          color = 'inherit';
+          backgroundColor = 'transparent';
+          pointer = 'pointer';
+          fontStyle = 'inherit';
+        }
+
+        const StarButton = styled.button`
+          outline: none;
+          box-shadow: none;
+          cursor: ${pointer};
+          color: ${color};
+          font: inherit;
+          background-color: ${backgroundColor};
+          border: 0;
+          padding: 10px 5px;
+          font-style: ${fontStyle};
+        `;
+
         return (
           <div key={i}>
-            <StarButton type="button" disabled={starRating.total === 0} onClick={() => setCurrentStar(!currentStar)} style={{ 'background-color': currentStar ? 'rgb(230, 243, 255)' : 'inherit' }}>
+            <StarButton type="button" disabled={disabled} onClick={() => setCurrentStar(!currentStar)}>
               {` ${5 - i} stars `}
-              <progress value={starRating.percentage.toString()} max="1" />
+              <Progress value={starRating.percentage.toString()} max="1" />
               {' '}
               <span id={ids[i]}>{starRating.total}</span>
               {' Reviews'}
-              <XComponent style={{ visibility: currentStar ? 'visible' : 'hidden' }}> X</XComponent>
+              <XComponent style={{ visibility: currentStar ? 'visible' : 'hidden' }}> &times;</XComponent>
             </StarButton>
             <br />
           </div>

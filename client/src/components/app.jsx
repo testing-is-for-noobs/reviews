@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import OverallReviews from './overallReviews.jsx';
-import Filter from './filter.jsx'
-import FilteredOptions from './filteredOptions.jsx'
-import IndividualReview from './individualReview.jsx'
-import dummyData from './dummyData.js';
-
+import OverallReviews from './overallReviews';
+import Filter from './filter';
+import FilteredOptions from './filteredOptions';
+import IndividualReview from './individualReview';
+import dummyData from './dummyData';
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(dummyData.products[0]);
@@ -27,7 +26,7 @@ function App() {
   ];
 
   useEffect(() => {
-    axios.get('15/reviews')
+    axios.get('1/reviews')
       .then((initialState) => {
         setCurrentProduct(initialState.data.products[0]);
         setCurrentReviews(initialState.data.reviews);

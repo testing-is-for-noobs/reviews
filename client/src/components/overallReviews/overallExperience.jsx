@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import starbar from '../ratingBars/starbar.jsx';
+import starbar from '../ratingBars/starbar';
 
 function OverallExperience({ currentProduct }) {
   const experienceTypes = ['Play Experience', 'Level of Difficulty', 'Value for Money'];
@@ -11,12 +11,16 @@ function OverallExperience({ currentProduct }) {
 
   // Styling
   const Experience = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     border-left: 1px solid rgb(224, 224, 224);
     padding-left: 20px;
   `;
 
   const ExpRating = styled.span`
     margin: 10px;
+    font-weight: bold;
   `;
 
   return (
