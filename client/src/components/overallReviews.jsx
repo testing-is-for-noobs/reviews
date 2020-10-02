@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import OverallRatings from './overallReviews/overallRatings.jsx';
-import WouldRecommend from './overallReviews/wouldRecommend.jsx';
-import Ratings from './overallReviews/ratings.jsx';
-import OverallExperience from './overallReviews/overallExperience.jsx';
+import OverallRatings from './overallReviews/overallRatings';
+import WouldRecommend from './overallReviews/wouldRecommend';
+import Ratings from './overallReviews/ratings';
+import OverallExperience from './overallReviews/overallExperience';
 
 function OverallReviews({currentProduct, allStarStates}) {
   const OverallSection = styled.section`
@@ -12,12 +12,13 @@ function OverallReviews({currentProduct, allStarStates}) {
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 5px;
+    gap: 20px;
   `;
 
   const RatingsAndExperience = styled.div`
     display: flex;
     padding-bottom: 15px;
+    gap: 20px;
   `;
 
   const PrivacyMsg = styled.div`

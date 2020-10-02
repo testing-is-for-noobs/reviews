@@ -10,7 +10,7 @@ function starbar(num) {
   `;
 
   const Gray = styled(Gold)`
-    color: #666;
+    color: rgb(224, 224, 224);
     position: relative;
   `;
 
