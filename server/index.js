@@ -15,7 +15,7 @@ app.get('/:pid/reviews', (req, res) => {
   });
 });
 
-app.put('/reviews/vote/:voteType/:id/:toggle', (req, res) => {
+app.put('/:pid/reviews/vote/:voteType/:id/:toggle', (req, res) => {
   db.vote(req.params.voteType, req.params.id, req.params.toggle).then((data) => {
     res.status(202).send(data);
   }).catch((err) => {

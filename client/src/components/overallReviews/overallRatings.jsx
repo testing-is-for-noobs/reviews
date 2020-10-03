@@ -16,6 +16,10 @@ function OverallRatings({ currentProduct }) {
     border-color: rgb(0, 109, 183);
     border-radius: 4px;
     cursor: pointer;
+    :hover {
+      background-color: white;
+      color: black;
+    }
   `;
 
   const StarsWrapper = styled.div`
@@ -28,6 +32,10 @@ function OverallRatings({ currentProduct }) {
     font-weight: bold;
   `;
 
+  const ScoreReviewWrap = styled.span`
+    vertical-align: 15%;
+  `;
+
   return (
     <Ratings>
       <StarsWrapper>
@@ -35,8 +43,10 @@ function OverallRatings({ currentProduct }) {
         <div>
           {starbar(currentProduct.avg_score)}
           {' '}
-          <AvgScore id="avgScore">{currentProduct.avg_score}</AvgScore>
-          {` (${currentProduct.total_reviews} Reviews) `}
+          <ScoreReviewWrap>
+            <AvgScore id="avgScore">{currentProduct.avg_score}</AvgScore>
+            {` (${currentProduct.total_reviews} Reviews) `}
+          </ScoreReviewWrap>
         </div>
       </StarsWrapper>
       <Button type="button"> Write a Review </Button>
