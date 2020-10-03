@@ -21,6 +21,7 @@ function OverallExperience({ currentProduct }) {
   const ExpRating = styled.span`
     margin: 10px;
     font-weight: bold;
+    vertical-align: 15%
   `;
 
   return (

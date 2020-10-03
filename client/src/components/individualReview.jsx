@@ -1,11 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import axios from 'axios';
 
 import starbar from './ratingBars/starbar';
+import AReview from './individualReview/aReview';
+import dummyData from './dummyData/individualReview';
 
-function IndividualReview({ currentReviews }) {
+function IndividualReview({ post }) {
+  console.log(post)
+  const {pid} = post[0];
   const experienceTypes = ['Play Experience', 'Level of Difficulty', 'Value for Money', 'Build Time', 'Building Experience'];
+
+  const [votes, setVotes] = useState(dummyData);
+  useEffect(() => {
+    const allVotes = {};
+    for (let i = 0; i < post.length; i += 1) {
+      allVotes[post[i].id] = {
+        upvotes: false,
+        downvotes: false,
+        upvotesCount: post[i].upvotes,
+        downvotesCount: post[i].downvotes,
+      };
+    }
+    setVotes(allVotes);
+  }, []);
+
+  const handleVote = (id, voteType) => {
+    const newVotes = { ...votes };
+    if(newVotes[id][voteType]) {
+      //decreases vote by 1
+      axios.put(`/${pid}/reviews/vote/${voteType}/${id}/N`);
+      newVotes[id][`${voteType}Count`] -= 1;
+    } else {
+      //increases vote by 1
+      axios.put(`/${pid}/reviews/vote/${voteType}/${id}/Y`);
+      newVotes[id][`${voteType}Count`] += 1;
+    }
+    newVotes[id][voteType] = !newVotes[id][voteType];
+    setVotes(newVotes);
+  };
 
   //styling
   const IndividualReviewSection = styled.section`
@@ -22,7 +56,6 @@ function IndividualReview({ currentReviews }) {
 
   const ReviewExperienceWrap = styled.div`
     display: flex;
-
   `;
 
   const Experience = styled.div`
@@ -61,10 +94,17 @@ function IndividualReview({ currentReviews }) {
     font-weight: bold;
   `;
 
+  const RatingNumber = styled(Bolded)`
+  vertical-align: 15%
+  `;
+
   const Thumbs = styled.button`
     background-color: transparent;
+    color: transparent;
+    text-shadow: 0 0 0 gray;
     border: none;
-    color: gray;
+    outline: none;
+    cursor: pointer;
   `;
 
   const Votes = styled.span`
@@ -74,8 +114,16 @@ function IndividualReview({ currentReviews }) {
 
   return (
     <IndividualReviewSection>
-      {currentReviews.map((review, i) => {
+      {post.map((review, i) => {
         const date = moment(review.date).format('MMMM D, Y');
+        let downvotes = false;
+        if (votes[review.id]) {
+          downvotes = votes[review.id].downvotes;
+        }
+        let upvotes = false;
+        if (votes[review.id]) {
+          upvotes = votes[review.id].upvotes;
+        }
 
         let buildingTime = '';
         if (review.build_hrs === 1) {
@@ -101,7 +149,9 @@ function IndividualReview({ currentReviews }) {
             <div>{date}</div>
             <div>
               {starbar(review.rating)}
-              {` ${review.rating}`}
+              <RatingNumber>
+                {` ${review.rating}`}
+              </RatingNumber>
             </div>
             <Bolded>{review.review_header}</Bolded>
             <UsernameInfo>
@@ -115,7 +165,8 @@ function IndividualReview({ currentReviews }) {
                   <Bolded>Purchased for: </Bolded>
                   <span>{` ${review.purchased_for}`}</span>
                 </div>
-                <div>{review.review}</div>
+                {/* <div>{review.review}</div> */}
+                <AReview oneReview={review.review} />
               </Review>
               <Experience>
                 {experienceRatings.map((experienceRating, i) => {
@@ -133,7 +184,9 @@ function IndividualReview({ currentReviews }) {
                         <div>{experienceTypes[i]}</div>
                         <div>
                           {starbar(experienceRating)}
-                          {` ${experienceRating}`}
+                          <RatingNumber>
+                            {` ${experienceRating}`}
+                          </RatingNumber>
                         </div>
                       </div>
                     );
@@ -143,10 +196,22 @@ function IndividualReview({ currentReviews }) {
             </ReviewExperienceWrap>
             <div>Was this helpful?</div>
             <div>
-              <Thumbs>&#x1f44d;</Thumbs>
-              <Votes>{review.upvotes}</Votes>
-              <Thumbs>&#x1f44e;</Thumbs>
-              <Votes>{review.downvotes}</Votes>
+              <Thumbs onClick={() => handleVote(review.id, 'upvotes')}
+                style={{
+                  'text-shadow': upvotes ? '0 0 0 rgb(0, 109, 183)' : '0 0 0 gray',
+                }}
+              >
+                &#x1f44d;
+              </Thumbs>
+              <Votes>{votes[review.id] ? votes[review.id].upvotesCount : 0}</Votes>
+              <Thumbs onClick={() => handleVote(review.id, 'downvotes')}
+                style={{
+                  'text-shadow': downvotes ? '0 0 0 rgb(0, 109, 183)' : '0 0 0 gray',
+                }}
+              >
+                &#x1f44e;
+              </Thumbs>
+              <Votes>{votes[review.id] ? votes[review.id].downvotesCount : 0}</Votes>
             </div>
           </ReviewWrap>
         );

@@ -6,7 +6,8 @@ import OverallReviews from './overallReviews';
 import Filter from './filter';
 import FilteredOptions from './filteredOptions';
 import IndividualReview from './individualReview';
-import dummyData from './dummyData';
+import PaginationBar from './paginationBar';
+import dummyData from './dummyData/dummyData';
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(dummyData.products[0]);
@@ -25,11 +26,16 @@ function App() {
     [oneStar, setOneStar],
   ];
 
+  //pagination logic
+  const postPerPage = 2;
+  const [post, setPost] = useState({ post: currentReviews.slice(0, postPerPage), page: 1, pageBar: [] });
+
   useEffect(() => {
-    axios.get('1/reviews')
+    axios.get('27/reviews')
       .then((initialState) => {
         setCurrentProduct(initialState.data.products[0]);
         setCurrentReviews(initialState.data.reviews);
+        setPost({ post: initialState.data.reviews.slice(0, postPerPage), page: 1, pageBar: [1, 2, 3, 4, 5, 6] });
       })
       .catch(() => {
         console.error('Could not grab the current state');
@@ -44,12 +50,11 @@ function App() {
   return (
     <Style>
       <OverallReviews currentProduct={currentProduct} allStarStates={allStarStates} />
-      <br />
-      <Filter />
-      <br />
+      <a name="reviewSection" href="#reviewSection" />
+      <Filter id="filter" />
       <FilteredOptions allStarStates={allStarStates} />
-      <br />
-      <IndividualReview currentReviews={currentReviews} />
+      <IndividualReview post={post.post} />
+      <PaginationBar setPost={setPost} currentReviews={currentReviews} postPerPage={postPerPage} page={post.page} pageBar={post.pageBar}/>
     </Style>
   );
 }

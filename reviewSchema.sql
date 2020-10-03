@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS reviews (
 	age_range VARCHAR(50),
 	recommendationYN CHAR(1) NOT NULL,
 	purchased_for VARCHAR(50) NOT NULL,
-	review VARCHAR(1000) NOT NULL,
+	review VARCHAR(5000) NOT NULL,
 	upvotes INT DEFAULT 0,
 	downvotes INT DEFAULT 0,
 	play_experience INT,

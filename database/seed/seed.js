@@ -5,7 +5,7 @@ const mysqlConfig = require('../config.js');
 
 const connection = mysql.createConnection(mysqlConfig);
 
-for (let i = 0; i < 10000; i++) {
+for (let i = 0; i < 2000; i++) {
   let reviewData = {};
   // Generate random data
   reviewData.date = faker.date.recent(60);
@@ -15,7 +15,7 @@ for (let i = 0; i < 10000; i++) {
   reviewData.age_range = faker.random.arrayElement(['14-18', '19-24', '25-34', '35-44', '45-54', '55-64', '65 Or Older']);
   reviewData.recommendationYN = faker.random.arrayElement(['Y', 'N']);
   reviewData.purchased_for = faker.random.arrayElement(['Son', 'Daughter', 'Grandson', 'Granddaughter', "Friend or Family Member's Child", 'Friend', 'Self']);
-  reviewData.review = faker.lorem.paragraph();
+  reviewData.review = faker.lorem.paragraphs(faker.random.number({ min: 1, max: 5 }));
   reviewData.upvotes = faker.random.number(10);
   reviewData.downvotes = faker.random.number(7);
   reviewData.play_experience = faker.random.arrayElement([faker.random.number({ min: 1, max: 5 }), null]);

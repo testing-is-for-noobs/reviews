@@ -32,13 +32,13 @@ function Filter() {
     <FilterWrap>
       <Reviews>Reviews</Reviews>
       <SelectWrap>
-        <Select>
+        <Select defaultValue='Most Relevant'>
           <option>Date - Newest first</option>
           <option>Date - oldest first</option>
           <option>Rating - High to Low</option>
           <option>Rating - Low to High</option>
           <option>Helpfulness</option>
-          <option selected>Most Relevant</option>
+          <option>Most Relevant</option>
         </Select>
       </SelectWrap>
     </FilterWrap>
