@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 function FilteredOptions({ allStarStates }) {
+  const [clickedFilters, setClickedFilters] = useState([]);
+
   const clearAll = () => {
     for (let i = 0; i < allStarStates.length; i += 1) {
       const setCurrentState = allStarStates[i][1];
@@ -30,8 +32,19 @@ function FilteredOptions({ allStarStates }) {
     border: 1px solid rgb(0, 109, 183);
   `;
 
+  const Filter = styled.div`
+    padding-top: 10px;
+  `;
+
   let filters = allStarStates.map((filter, i) => {
     const [currentFilter, setCurrentFilter] = filter;
+
+    useEffect(() => {
+      if (currentFilter) {
+        setClickedFilters(clickedFilters.push(i + 1));
+      }
+    }, [currentFilter]);
+
     if (currentFilter) {
       return (
         <span key={i}>
@@ -43,6 +56,7 @@ function FilteredOptions({ allStarStates }) {
       );
     }
   });
+
   if (filters.some((val) => val)) {
     filters = (
       <div>
@@ -57,9 +71,9 @@ function FilteredOptions({ allStarStates }) {
   }
 
   return (
-    <div>
+    <Filter>
       {filters}
-    </div>
+    </Filter>
   );
 }
 
