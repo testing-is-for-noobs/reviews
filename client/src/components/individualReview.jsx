@@ -8,7 +8,6 @@ import AReview from './individualReview/aReview';
 import dummyData from './dummyData/individualReview';
 
 function IndividualReview({ post }) {
-  console.log(post)
   const {pid} = post[0];
   const experienceTypes = ['Play Experience', 'Level of Difficulty', 'Value for Money', 'Build Time', 'Building Experience'];
 
