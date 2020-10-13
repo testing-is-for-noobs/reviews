@@ -10,9 +10,11 @@
   },
   "scripts": {
     "test": "jest",
+    "start": "node server/index.js",
     "seed": "mysql -u kenny < reviewSchema.sql && node ./database/seed/seed.js && mysql -u kenny < productSchema.sql",
-    "start:dev": "nodemon server/index.js",
-    "react-dev": "webpack -d --watch"
+    "start-dev": "nodemon server/index.js",
+    "react-dev": "webpack -d --watch",
+    "react-prod": "webpack"
   },
   "repository": {
     "type": "git",

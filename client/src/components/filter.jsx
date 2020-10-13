@@ -17,7 +17,7 @@ function Filter() {
   `;
 
   const SelectWrap = styled.div`
-    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    background-color: rgb(255, 255, 255);
     border: 1px solid rgb(224, 224, 224);
     font-family: inherit;
     padding: 10px;

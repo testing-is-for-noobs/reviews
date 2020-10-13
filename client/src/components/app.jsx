@@ -10,6 +10,8 @@ import IndividualReview from './individualReview';
 import PaginationBar from './paginationBar';
 import dummyData from './dummyData/dummyData';
 
+// const URL = 'http://localhost:3000';
+
 function App() {
   const [currentProduct, setCurrentProduct] = useState(dummyData.products[0]);
   const [allReviews, setAllReviews] = useState(dummyData.reviews);
@@ -30,7 +32,7 @@ function App() {
   ];
 
   //pagination logic
-  const postPerPage = 2;
+  const postPerPage = 3;
   const [post, setPost] = useState({
     post: currentReviews.slice(0, postPerPage),
     page: 1,
@@ -39,7 +41,7 @@ function App() {
   const [pageNumbers, setPageNumbers] = useState([]);
 
   useEffect(() => {
-    axios.get('27/reviews')
+    axios.get('/81/reviews')
       .then((initialState) => {
         setCurrentProduct(initialState.data.products[0]);
         setCurrentReviews(initialState.data.reviews);
@@ -74,13 +76,19 @@ function App() {
     background-color: light-gray;
     border: none;
     cursor: pointer;
+    width: 100%;
     padding: 20px 10px;
-    display: flex;
-    width: 100%
   `;
 
-  const ShowAllReviews = styled.div`
-    padding: 0 10px;
+  const TextWrap = styled.div`
+    display: flex;
+    width: 79rem;
+    margin: 0 auto;
+  `;
+
+  const ShowAllReviews = styled(TextWrap)`
+    display: inline;
+    padding: 10px 41px;
   `;
 
   const ReviewButtonText = styled.span`
@@ -89,16 +97,20 @@ function App() {
     text-align: left;
     font-size: 2em;
   `;
+
   const PlusAnimation = styled.span`
     font-size: 2em;
   `;
+
   return (
     <Style>
       <ShowReviewsButton type="button" onClick={() => setDisplayReviews(!displayReviews)}>
-        <ReviewButtonText>{`Customer Reviews (${currentReviews.length})`}</ReviewButtonText>
-        <PlusAnimation style={{transform:[{rotate: '30 deg'}]}}>
-          {displayReviews ? '\u2296' : '\u2295'}
-        </PlusAnimation>
+        <TextWrap>
+          <ReviewButtonText>{`Customer Reviews (${currentReviews.length})`}</ReviewButtonText>
+          <PlusAnimation style={{transform:[{rotate: '30 deg'}]}}>
+            {displayReviews ? '\u2296' : '\u2295'}
+          </PlusAnimation>
+        </TextWrap>
       </ShowReviewsButton>
       {
         displayReviews
@@ -109,7 +121,9 @@ function App() {
             <Filter id="filter" />
             <FilteredOptions allStarStates={allStarStates} />
             <IndividualReview post={post.post} />
-            <PaginationBar setPost={setPost} currentReviews={currentReviews}
+            <PaginationBar
+              setPost={setPost}
+              currentReviews={currentReviews}
               postPerPage={postPerPage}
               page={post.page}
               pageBar={post.pageBar}

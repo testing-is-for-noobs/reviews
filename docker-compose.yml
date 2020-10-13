@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  reviews:
+    build: ./
+    ports:
+      - '3000:3000'
+    depends_on:
+      - 'mysql'
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: reviews
+    volumes:
+      - './:/src/app'
+
+  mysql:
+    image: mysql:5.7.31
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: reviews
+    volumes:
+      - container-volume:/var/lib/mysql
+      - ./seed.sql:/docker-entrypoint-initdb.d/seed.sql
+
+volumes:
+  container-volume:
