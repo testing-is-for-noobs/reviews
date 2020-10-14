@@ -40,20 +40,35 @@ Read all the reviews
 `[
     {
         pid: 1,
+	
         uid: 12,
+	
         user_name: 'A',
+	
         user_age_range: '25-30',
+	
         user_purchase_for: 'self',
+	
         star_rating: 3,
+	
         data: June 7th, 2020,
+	
         reviews: 'hi! blablabla'
+	
         helpful_yes: 10,
+	
         helpful_no: 4,
+	
         play_experience: 2,
+	
         difficulty_level: 3,
+	
         money_value: 3,
+	
         build_hrs: 30,
+	
         build_mins: 10,
+	
         building_experience: Intermediate LEGO builder,
     }
 ]
@@ -69,16 +84,27 @@ Create a review
 
 `{
     user_name: 'B',
+    
     user_age_range: '30-35',
+    
     user_purchase_for: 'self',
+    
     star_rating: 3,
+    
     data: June 20th, 2020,
+    
     reviews: 'hi! blablabla'
+    
     play_experience: 2,
-	difficulty_level: 3,
+    
+    difficulty_level: 3,
+    
     money_value: 3,
+    
     build_hrs: 30,
+    
     build_mins: 10,
+    
     building_experience: Expert LEGO builder,
 }`
 
@@ -92,6 +118,7 @@ Update the number of helpful_yes and helpful_no
 
 `{
     helpful_yes: Number,
+    
     helpful_no: Number,
 }`
 
