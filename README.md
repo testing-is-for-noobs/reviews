@@ -37,7 +37,8 @@ Read all the reviews
 * Success Status Code: 200
 
 * Returns: JSON array of multiple reviews.
-`[
+`
+[
     {
         pid: 1,
 	
@@ -72,6 +73,7 @@ Read all the reviews
         building_experience: Intermediate LEGO builder,
     }
 ]
+
 `
 
 Create a review
@@ -82,7 +84,8 @@ Create a review
 
 * Request Body: Expects JSON with the following keys
 
-`{
+`
+{
     user_name: 'B',
     
     user_age_range: '30-35',
@@ -106,7 +109,9 @@ Create a review
     build_mins: 10,
     
     building_experience: Expert LEGO builder,
-}`
+}
+
+`
 
 Update the number of helpful_yes and helpful_no
 
@@ -116,11 +121,14 @@ Update the number of helpful_yes and helpful_no
 
 * Request Body: Expects JSON with updated the number of of helpful_yes and helpful_no
 
-`{
+`
+{
     helpful_yes: Number,
     
     helpful_no: Number,
-}`
+}
+
+`
 
 Delete the user's review
 
