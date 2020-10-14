@@ -1,6 +1,6 @@
-# reviews
+# Reviews
 
-# reviews schema
+## Reviews Schema
 
 pid: NUMBER
 
@@ -43,9 +43,9 @@ building_experience STRING
 
 _Read all reviews_
 
-* GET: /reviews/:pid
+* GET: `/reviews/:pid`
 
-* Success Status Code: 200
+* Success Status Code: `200`
 
 * Returns: JSON array of multiple reviews. 
 
@@ -87,9 +87,9 @@ _Read all reviews_
 ```
 _Create a new review_
 
-* POST: /reviews/:pid
+* POST: `/reviews/:pid`
 
-* Success Status Code: 201
+* Success Status Code: `201`
 
 * Request Body: Expects JSON with the following keys
 
@@ -125,9 +125,9 @@ _Create a new review_
 
 _Update the number of helpful_yes and helpful_no_
 
-* PUT: /reviews/helpful/:pid
+* PUT: `/reviews/helpful/:pid`
 
-* Success Status Code: 202
+* Success Status Code: `202`
 
 * Request Body: Expects JSON with updated the number of of helpful_yes and helpful_no
 
@@ -142,7 +142,7 @@ _Update the number of helpful_yes and helpful_no_
 
 _Delete the user's review_
 
-* DELETE: /reviews/:pid/:uid
+* DELETE: `/reviews/:pid/:uid`
 
 * Success Status Code: 202
 
