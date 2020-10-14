@@ -1,5 +1,5 @@
-# reviews schema
-user_id: NUMBER.
+# reviews
+
 
 user_name: STRING
 
@@ -133,3 +133,4 @@ Delete the user's review
 - DELETE:/api/reviews/:pid/:uid
 
 * Success Status Code: 204
+
