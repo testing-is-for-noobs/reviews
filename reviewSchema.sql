@@ -39,3 +39,4 @@ CREATE TABLE IF NOT EXISTS reviews (
 -- );
 
 -- INSERT INTO reviews VALUES (1, 4, '2020-09-01', "Best Toy", "xLegoMaster827x", "19-24", "Y", "myself", "I got this for my own birthday and now it has become my best friend XOXO", 0, 0, 5, 3, 2, 3, 21, "Expert", 8);
+
