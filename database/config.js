@@ -1,6 +1,6 @@
 module.exports = {
-  host: 'mysql',
+  //host: 'mysql',
   user: 'root',
-  password: 'secret',
+  password: '',
   database: 'reviews',
 };

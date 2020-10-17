@@ -2,9 +2,9 @@
 
 # reviews schema
 
-pid: NUMBER
+pid: NUMBER, SERIAL
 
-uid: NUMBER
+uid: NUMBER, SERIAL
 
 user_name: STRING
 
