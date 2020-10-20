@@ -14,7 +14,8 @@
     "seed": "mysql -u root < reviewSchema.sql && node ./database/seed/seed.js && mysql -u root < productSchema.sql",
     "start-dev": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
-    "react-prod": "webpack"
+    "react-prod": "webpack",
+    "large-seed": "node datagenerator/generateReviews.js"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.21.1",
     "eslint-plugin-react-hooks": "^4.1.2",
+    "fast-csv": "^4.3.2",
     "fs": "0.0.1-security",
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
