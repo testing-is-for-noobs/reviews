@@ -1,27 +1,35 @@
-CREATE KEYSPACE review WITH replication =
-  {‘class’: ‘SimpleStrategy’, ‘replication_factor’ : 3};
+DROP KEYSPACE IF EXISTS review;
 
-CREATE TABLE reviews (
+CREATE KEYSPACE review WITH replication =
+  {'class': 'SimpleStrategy', 'replication_factor' : 3};
+
+USE review;
+
+CREATE TABLE review.review100 (
+  rid int,
   pid int,
-  rid int ,
-  full_name text,
+  user_name text,
   age_range text,
-  create_date date,
+  create_date text,
   review_title text,
   recommendationYN text, 
   purchased_for text,
+  rating int,
   review text,
-  upvotes smallint,
-  downvotes smallint,
-  play_experience smallint,
-  difficulty_level smallint,
-  money_value smallint,
-  build_hrs smallint,
-  build_mins smallint,
+  upvotes int,
+  downvotes int,
+  play_experience text,
+  difficulty_level text,
+  money_value text,
+  build_hrs text,
+  build_mins text,
   building_experience text,
   PRIMARY KEY(pid, rid) 
   );
 
+
+
+COPY review.review100 (rid, pid, user_name, age_range,create_date, review_title, recommendationYN, purchased_for,rating,review,upvotes,downvotes,play_experience, difficulty_level, money_value, build_hrs, build_mins, building_experience) FROM '/Users/tingling/Desktop/SDC/reviews/datagenerator/postgresReview100.csv' WITH DELIMITER = '|' AND HEADER=TRUE;
 
 -- CREATE KEYSPACE review WITH replication =
 --   {‘class’: ‘SimpleStrategy’, ‘replication_factor’ : 3};
