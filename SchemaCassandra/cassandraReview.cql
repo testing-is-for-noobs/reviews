@@ -5,9 +5,9 @@ CREATE KEYSPACE review WITH replication =
 
 USE review;
 
-CREATE TABLE review.review100 (
-  rid int,
+CREATE TABLE review.review (
   pid int,
+  rid int,
   user_name text,
   age_range text,
   create_date text,
@@ -18,19 +18,39 @@ CREATE TABLE review.review100 (
   review text,
   upvotes int,
   downvotes int,
-  play_experience text,
-  difficulty_level text,
-  money_value text,
-  build_hrs text,
-  build_mins text,
+  play_experience int,
+  difficulty_level int,
+  money_value int,
+  build_hrs int,
+  build_mins int,
   building_experience text,
-  PRIMARY KEY(pid, rid) 
+  PRIMARY KEY((pid), rid) 
+  );
+
+  CREATE TABLE review.summary (
+    pid int,
+    avg_score decimal,
+    total_reviews int,
+    percent_total int, 
+    five_star int,
+    five_star_percentage int,
+    four_star int, 
+    four_star_percentage int,
+    three_star int, 
+    three_star_percentage int,
+    two_star int,
+    two_star_percentage int,
+    one_star int,
+    one_star_percentage int,
+    play_experience_avg decimal,
+    difficulty_level_avg decimal, 
+    money_value_avg decimal,
+  PRIMARY KEY((pid),total_reviews) 
   );
 
 
-
-COPY review.review100 (rid, pid, user_name, age_range,create_date, review_title, recommendationYN, purchased_for,rating,review,upvotes,downvotes,play_experience, difficulty_level, money_value, build_hrs, build_mins, building_experience) FROM '/Users/tingling/Desktop/SDC/reviews/datagenerator/postgresReview100.csv' WITH DELIMITER = '|' AND HEADER=TRUE;
-
+COPY review.review (pid, rid, user_name, age_range,create_date, review_title, recommendationYN, purchased_for,rating,review,upvotes,downvotes,play_experience, difficulty_level, money_value, build_hrs, build_mins, building_experience) FROM '/Users/tingling/Desktop/SDC/reviews/datagenerator/casReveiw.csv' WITH DELIMITER = '|' AND HEADER=TRUE;
+COPY review.summary(pid, avg_score, total_reviews,percent_total, five_star,five_star_percentage,four_star, four_star_percentage,three_star, three_star_percentage,two_star,two_star_percentage,one_star,one_star_percentage,play_experience_avg,difficulty_level_avg, money_value_avg) FROM '/Users/tingling/Desktop/SDC/reviews/datagenerator/casSummary.csv' WITH DELIMITER = '|' AND HEADER=TRUE;
 -- CREATE KEYSPACE review WITH replication =
 --   {‘class’: ‘SimpleStrategy’, ‘replication_factor’ : 3};
 

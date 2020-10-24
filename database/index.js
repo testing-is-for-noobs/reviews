@@ -34,7 +34,7 @@ const vote = (voteType, id, toggle) => (
 const createReview = (pid, review) => (
   db.queryAsync(`INSERT INTO reviews SET ? where pid =${pid}`, review))
   .then(() => db.queryAsync(`SELECT * FROM reviews where pid =${pid}`))
-  .catch(() => console.error('error in creating a new review'))
+  .catch(() => console.error('error in creating a new review'));
 
 const deleteReview = (pid, id) => (
   db.queryAsync(`DELETE FROM reviews where pid =${pid} and id =${id}`)
