@@ -9,7 +9,7 @@ const client = new cassandra.Client({
 // =======GET=======
 
 const getReviews = (pid, callback) => {
-  const query = 'SELECT * FROM review WHERE pid= ?';
+  const query = 'SELECT * FROM review WHERE pid= ? order by rid desc limit 10';
   client.execute(query, [pid], { prepare: true })
     .then((result) => callback(null, result.rows))
     .catch((err) => callback(err));

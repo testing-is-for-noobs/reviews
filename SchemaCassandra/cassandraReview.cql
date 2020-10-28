@@ -24,8 +24,9 @@ CREATE TABLE review.review (
   build_hrs int,
   build_mins int,
   building_experience text,
-  PRIMARY KEY((pid), rid) 
+  PRIMARY KEY((pid),rid, create_date) 
   );
+
 
   CREATE TABLE review.summary (
     pid int,
