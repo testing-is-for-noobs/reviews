@@ -1,7 +1,8 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-// const PostDB = require('../pgdatabase');
+const PostDB = require('../pgdatabase');
 const CasDB = require('../casdatabase');
 
 const app = express();
@@ -13,8 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/../client/dist`));
 
 app.get('/reviews/:pid/', (req, res) => {
-  const { pid } = req.params;
-  CasDB.getReviews(pid, (err, data) => {
+  PostDB.getReviews(req.params.pid, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -24,8 +24,7 @@ app.get('/reviews/:pid/', (req, res) => {
 });
 
 app.get('/reviews/summary/:pid/', (req, res) => {
-  const { pid } = req.params;
-  CasDB.getSummary(pid, (err, data) => {
+  PostDB.getSummary(req.params.pid, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -35,9 +34,7 @@ app.get('/reviews/summary/:pid/', (req, res) => {
 });
 
 app.post('/reviews', (req, res) => {
-  console.log(req.body);
-  const review = req.body;
-  CasDB.insertReviews(review, (err, data) => {
+  PostDB.insertReviews(req.body, (err) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -47,9 +44,7 @@ app.post('/reviews', (req, res) => {
 });
 
 app.put('/reviews/:pid/:rid', (req, res) => {
-  const { pid, rid } = req.params;
-  const update = req.body;
-  CasDB.updateReviews(pid, rid, update, (err, data) => {
+  PostDB.updateReviews(req.params.pid, req.params.rid, req.body, (err) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -59,8 +54,7 @@ app.put('/reviews/:pid/:rid', (req, res) => {
 });
 
 app.delete('/reviews/:pid/:rid', (req, res) => {
-  const { pid, rid } = req.params;
-  CasDB.deleteReviews(pid, rid, (err, data) => {
+  PostDB.deleteReviews(req.params.pid, req.params.rid, (err) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -86,6 +80,7 @@ app.delete('/reviews/:pid/:rid', (req, res) => {
 //     res.status(404).send(err);
 //   });
 // });
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
